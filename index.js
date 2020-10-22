@@ -6,12 +6,13 @@ const port = 3000;
 
 io.on('connection', (socket) => {
   console.log('a user connected');
-
   socket.on('newMsg', (msg) => {
     console.log(`Emitiendo nuevo mensaje: ${msg.content}`);
     io.emit('newMsg', msg);
   });
-
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
 });
 
 http.listen(port, () => {
